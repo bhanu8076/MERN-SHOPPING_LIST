@@ -1,4 +1,40 @@
+1./////////////////////////////////////////////////////////////////
+npm init
+
 npm i express body-parser mongoose mongoose concurrently
 
 //-D means its a dev dependancy, wont get updated to production
 npm i -D nodemon
+
+Build server endpoints
+
+2./////////////////////////////////////////////////////////////////
+//create client folder
+cd client
+
+//install create-react-app globally if you havent already
+npm i -g create-react-app
+
+//create it an generate it in the CURRENT client folder
+create-react-app .
+
+//add proxy value in frontend package.json so you dont have to do: axios.get('http://localhost:5000/api/items')
+
+//now we configure running the server and front end at the same time with npm install concurrently if we haven't done that already with npm i concurrently on the server folder
+
+//to the scripts in package.json, we add:
+"client": "npm start --prefix client" OR "cd client && npm start" 
+//to have an ability to just run the react without the server, and then create 
+"dev": "concurrently \"npm run server\" \"npm run client\""
+//to run them both with one command
+// also we create a command for installing the client modules:
+"client-install": "npm install --prefix client",
+
+
+//clean up inside the client src folder remove excess
+
+cd client
+
+//bootstrap allows us to use the bootstrap css, reactstrap allows us to use components out of bootstrap, uuid generates random ids for build testing only, react-transition-group is pretty transitions yay
+
+npm i bootstrap reactstrap uuid react-transition-group
