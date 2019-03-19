@@ -1,0 +1,4 @@
+npm i express body-parser mongoose mongoose concurrently
+
+//-D means its a dev dependancy, wont get updated to production
+npm i -D nodemon
