@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import uuid from "uuid";
+
 //connect allows us to get state from redux into a react component, when we use connect we have to export default connect(mapStateToProps, {any actions we wanna use})(Original Class)
 import { connect } from "react-redux";
 //when you bring in actions from Redux it's gonna be stored as a prop (this.props.getItems)

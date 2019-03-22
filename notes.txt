@@ -89,3 +89,9 @@ ADD:
 DELETE
 -. Update the Action, change reducer to have _id, change component to use _id as that is what MongoDb calls it.
 
+ 
+ 8.Deploy to Heroku
+ - update server to point to the front end static assets: unless we're hitting the api routes in server.js, point to the index.html
+ - create post build script: in package.json add heroku-postbuild scripts that will install on the server.
+heroku login
+heroku create

@@ -11,7 +11,6 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { addItem } from "../actions/itemActions";
-import PropTypes from "prop-types";
 //import uuid from "uuid";
 class ItemModal extends Component {
   state = {
@@ -50,7 +49,6 @@ class ItemModal extends Component {
   };
 
   render() {
-    const x = -50;
     return (
       <div>
         <Button
