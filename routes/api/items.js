@@ -7,7 +7,7 @@ const item = require("../../models/item");
 // @route  GET api/items
 // @desc   Get All Items
 // @access Public
-//instead of app.get in the server.js file we use:
+//instead of app.get in the server.js file we  use:
 router.get("/", (req, res) => {
   //take the model and use the find method to return a promise. SOrt it descending, then return the response in json format.
   item
