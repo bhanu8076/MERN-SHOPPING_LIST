@@ -95,3 +95,7 @@ DELETE
  - create post build script: in package.json add heroku-postbuild scripts that will install on the server.
 heroku login
 heroku create
+//get the app name from online (check deploy tab for instructions)
+heroku git:remote -a lit-eyrie-94216
+//push to heroku and build the scrips there
+git push heroku master
