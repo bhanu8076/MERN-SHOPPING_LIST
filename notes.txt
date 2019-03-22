@@ -38,3 +38,40 @@ cd client
 //bootstrap allows us to use the bootstrap css, reactstrap allows us to use components out of bootstrap, uuid generates random ids for build testing only, react-transition-group is pretty transitions yay
 
 npm i bootstrap reactstrap uuid react-transition-group
+
+
+5.Redux
+cd client
+npm i redux react-redux redux-thunk
+-create store.js
+-App.js:
+ - wrap return in provider with a prop of the store
+ - import provider and store
+-Reducers/index.js
+ - create file that will compile all the reducers together.
+-itemReducer.js
+ - create individual reducers now, copy the state accross under 
+   const initialState = {
+ - create the switch at the bottom that will accept the actions
+-itemActions.js
+-ShoppingList.js 
+ - import connect, export connect (mapStateToProps, { getItems prop } & component
+ - mapStateToProps, set the prop name to the reducer action name
+ - declare the propTypes for validation purposes (state is an object)
+ShoppingList.js
+ - change the reference inside the render method to the new props location
+ RUN getItems with componentDidMount: getItems is now a la Redux.
+
+Adding An Action (deleteItem):
+1COMPONENT:
+ -add a function to an onClick, bind id so its accessible outside
+ -in the function outside call the action with this.props.deleteItem(id)
+ -import the action and export with connect, now its accessible with this.props.deleteItem
+1ACTION:
+ -add action in Actions folder (pass in the id as one of the arguments), name it payload and return it
+2REDUCER
+ -add a new switch to the function in the Reducer.
+ -create the state, and the new filtered items
+
+
+ 
