@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
     name: req.body.name
   });
 
-  //the Item is for now only in memory so we save the new Item onto the database, and the promise based return spits out the item
+  //the Item is for now only in memory so we save the new Item onto the database, and the promise based return spits out the item//this item gets sent by the addItem Action
   newItem.save().then(item => res.json(item));
 });
 

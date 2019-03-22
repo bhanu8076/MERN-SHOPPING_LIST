@@ -75,3 +75,17 @@ Adding An Action (deleteItem):
 
 
  
+7. Connecting with MongoDB
+cd client
+npm i axios
+
+-. Create: type, action, reducer and state for loading (loading: false).
+GET:
+-. Update the Action to come from the server. Query your server endpoints for the data and send them as a payload to the dispatcher
+-. Update the Reducers to receive the new payload and set loading to false after.
+ADD:
+-. Update Action, keep the reducer the same.
+-. Remove uuid from modal Addcomponent
+DELETE
+-. Update the Action, change reducer to have _id, change component to use _id as that is what MongoDb calls it.
+

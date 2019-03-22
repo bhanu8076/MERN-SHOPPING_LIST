@@ -12,7 +12,7 @@ import {
 import { connect } from "react-redux";
 import { addItem } from "../actions/itemActions";
 import PropTypes from "prop-types";
-import uuid from "uuid";
+//import uuid from "uuid";
 class ItemModal extends Component {
   state = {
     modal: false,
@@ -38,7 +38,7 @@ class ItemModal extends Component {
 
     //create an item with an id and name
     const newItem = {
-      id: uuid(),
+      //id: uuid(),
       name: this.state.name
     };
 
@@ -92,13 +92,6 @@ class ItemModal extends Component {
     );
   }
 }
-
-//whenever you have component properties you should put them inside of prop types, which is a form of validation, we also add isRequired.
-ItemModal.propTypes = {
-  addItems: PropTypes.func.isRequired,
-  //item represents our state (it is a prop, but we're mapping it from the state), which is an object
-  item: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
   //same name as the reducer in reducers index.js
