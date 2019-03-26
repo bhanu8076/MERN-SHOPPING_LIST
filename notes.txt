@@ -147,4 +147,18 @@ authActions.js: create
 errorActions.js: create
 
 
-11. Now we're checking for storage in out local storage constantly
+11. Create the React modal for registration. Now we're checking for storage in out local storage constantly.
+RegisterModal.js: create file for regitration popup.
+AppNavbar.js: add registration link to navbar instead of github link.
+
+- When the register button is clicked, we want an action to be fired:
+RegisterModal: import this 'register' action at the top, and export it at the bottom inside curly braces. Include it in propTypes declarations.
+authActions.js: add //Register User code
+RegisterModal: 
+  -add the code to fire the register function in the props. 
+  - add componentDidUpdate to catch errors before the register button is clicked.
+  - add a ternary operator in ModalBody to check for the error 'msg' and alert if so.
+  - import clearErrors, add it to the mapStateToProps function, add it to propTypes, and finally add it before the modal changes state.
+  - make the modal close if modal is up and is authenticated inside the componentDidUpdate function.
+Logout.js: create file, add it to AppNavbar in a NavItem.
+authActions.js: add basic logout action & export it.

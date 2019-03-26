@@ -97,4 +97,5 @@ const mapStateToProps = state => ({
 });
 
 // prettier-ignore
+//connect allows us to get state from redux into a react component, when we use connect we have to export default connect(mapStateToProps, {any actions we wanna use})(Original Class)
 export default connect(mapStateToProps,{ addItem })(ItemModal);

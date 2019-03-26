@@ -42,6 +42,38 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
+//Register User
+//destructure the object right here
+export const register = ({ name, email, password }) => dispatch => {
+  // Headers (takes an ovject in an object like so)
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  // Request body
+  const body = JSON.stringify({ name, email, password });
+
+  //Once we have the headers and body, we wanna send an axios request to the relevant endpoint with the header & body we just declared. This will give us a promise back with a repsponse.
+  axios
+    .post("/api/users", body, config)
+    .then(res =>
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      //have to import returnErrors above.  it takes in parameters of a message, a status and a apossible id (which we need to check for in RegisterModal before submitting).
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
+      );
+      dispatch({
+        type: REGISTER_FAIL
+      });
+    });
+};
 //Setup config/headers and token. Now anyttime we want to sent the token to a certain endpoint we simply send tokenConfig(getState)
 export const tokenConfig = getState => {
   //get token from local storage (in the initialState of authReducer.js)
@@ -59,4 +91,11 @@ export const tokenConfig = getState => {
   }
 
   return config;
+};
+
+//logout action
+export const logout = () => {
+  return {
+    type: LOGOUT_SUCCESS
+  };
 };

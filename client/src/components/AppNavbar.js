@@ -11,6 +11,12 @@ import {
   Container
 } from "reactstrap";
 
+//import the registration link into navbar
+import RegisterModal from "./auth/RegisterModal";
+
+//import the logout link
+import Logout from "./auth/Logout";
+
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -33,9 +39,10 @@ class AppNavbar extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="https://github.com/AGrush/MERN-stack-React-app">
-                    Github
-                  </NavLink>
+                  <RegisterModal />
+                </NavItem>
+                <NavItem>
+                  <Logout />
                 </NavItem>
               </Nav>
             </Collapse>

@@ -8,7 +8,7 @@ export const returnErrors = (msg, status, id = null) => {
   };
 };
 
-// RETURN ERROS
+// CLEAR ERRORS: remove errors when necessary such as when you close the modal and had errors in it.
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS
