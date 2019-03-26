@@ -101,7 +101,7 @@ heroku git:remote -a lit-eyrie-94216
 git push heroku master
 
 
-9. Login with Backend Auth 
+9. Login with Backend Auth, JWT functionality for backend with NODE and express and json web tokens.
 - copy item schema and change variable names to fit with a Users inputs.
 Set up a route: we want a route to be able to register a user.
 - add an extra USE ROUTES:line in server.js
@@ -135,4 +135,16 @@ Create the middleware so that we can have private routes that are only accessed 
   - Items.js: Bring in this middleware from auth.js, add 'auth' as a second parameter of POST and DELETE to protect those routes.
   - Auth.js: Create a route here, get the current users data by using the token. The reason we want to do this is because JWT is stateless. We need a way to constantly validate the user that's logged in. We need a route that's just going to take the token and return the user data minus the password.
   Bring in the auth middleware at top and add the route.
-  
+  - Test the route with x-auth-token : token key value pair get request on it.
+
+
+10. React login & register component (so that we can get a token) & Redux auth reducer (to access a private route). Implement 9 into front end.
+
+Types.js: add new types for this section
+authReducer.js: create and add to the Index.js combining the reducers
+errorReducer.js: create and add to the Index.js combining the reducers
+authActions.js: create
+errorActions.js: create
+
+
+11. Now we're checking for storage in out local storage constantly
