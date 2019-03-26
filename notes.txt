@@ -99,3 +99,40 @@ heroku create
 heroku git:remote -a lit-eyrie-94216
 //push to heroku and build the scrips there
 git push heroku master
+
+
+9. Login with Backend Auth 
+- copy item schema and change variable names to fit with a Users inputs.
+Set up a route: we want a route to be able to register a user.
+- add an extra USE ROUTES:line in server.js
+Implement the express router, build the server endpoints.
+- copy routes/api/items.js and make new users.js with simple post
+        router.post("/", (req, res) => {
+          res.send("register");
+        });
+- use postman to send a request to the route to check it works.
+- remove bodyparser as it comes with express
+npm i bcryptjs
+- put in code for bcrypt in users.js api
+Set up JWT tokens & Sort out config
+npm i jsonwebtoken
+npm i config
+-change over from keys.js to default.json to hold keys & secret, change in server.js:
+           const db = config.get("mongoURI");
+-import jwt and config in users.js route, add jwt.sign code to route.
+
+test in postman with the same request does it add user again.
+
+AUTHENTICATION
+Create the route for the login/authentication procedure (v. similar to create user route)
+AUTH.JS:
+  - Create this new route for logins
+  - Make the file available in server.js under //use routes
+
+CREATE MIDDLEWARE
+Create the middleware so that we can have private routes that are only accessed if we send along this token. Then whenever we want a private route, we add this middleware as a second parameter in the endpoint.
+  - Create the middleware folder/auth.js file.
+  - Items.js: Bring in this middleware from auth.js, add 'auth' as a second parameter of POST and DELETE to protect those routes.
+  - Auth.js: Create a route here, get the current users data by using the token. The reason we want to do this is because JWT is stateless. We need a way to constantly validate the user that's logged in. We need a route that's just going to take the token and return the user data minus the password.
+  Bring in the auth middleware at top and add the route.
+  

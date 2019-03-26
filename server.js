@@ -1,27 +1,22 @@
 //Part 1
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 //to deal with file paths
 const path = require("path");
 
-// for the items.js file to work
-const items = require("./routes/api/items");
-
+//where the keyfile & secret is held
+const config = require("config");
 //initialise express
 const app = express();
 
-// BodyParser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 //DB CONFIG.. mlab.com/cloud.mongodb.com URI ..create the config Folder for the URI and bring it in here
-const db =
-  "mongodb+srv://andrey:andrey123@cluster0-1gs4s.mongodb.net/test?retryWrites=true";
-
+const db = config.get("mongoURI");
 //connnect to Mongo (Promise based)
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect(db, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => console.log("Mongo DV Connected"))
   .catch(err => console.log(err));
 
@@ -32,8 +27,10 @@ mongoose
 //   client.close();
 // }, console.log("Connected..."));
 
-//use routes. anything that goes to ap/items should refer to the items variable which is the 'items = file' definition above.
-app.use("/api/items", items);
+//USE ROUTES: anything that goes to ap/items should refer to the items variable. Make the route files available here.
+app.use("/api/items", require("./routes/api/items"));
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 //heroku step: If, in our node environment = production then we want to set a static folder.
 if (process.env.NODE_ENV === "production") {
