@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
 //Item Model.. we need thsi to make queries like Item.find and save...
-const Item = require("../../models/Item");
+const Item = require("../../models/item");
 
 // @route  GET api/items
 // @desc   Get All Items
