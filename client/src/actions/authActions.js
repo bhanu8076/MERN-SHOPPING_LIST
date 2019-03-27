@@ -99,3 +99,36 @@ export const logout = () => {
     type: LOGOUT_SUCCESS
   };
 };
+
+//Login User
+//destructure the object right here
+export const login = ({ email, password }) => dispatch => {
+  // Headers (takes an ovject in an object like so)
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  // Request body
+  const body = JSON.stringify({ email, password });
+
+  //Once we have the headers and body, we wanna send an axios request to the relevant endpoint with the header & body we just declared. This will give us a promise back with a repsponse.
+  axios
+    .post("/api/auth", body, config)
+    .then(res =>
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      //have to import returnErrors above.  it takes in parameters of a message, a status and a apossible id (which we need to check for in RegisterModal before submitting).
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
+      );
+      dispatch({
+        type: LOGIN_FAIL
+      });
+    });
+};

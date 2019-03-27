@@ -91,8 +91,12 @@ DELETE
 
  
  8.Deploy to Heroku
- - update server to point to the front end static assets: unless we're hitting the api routes in server.js, point to the index.html
- - create post build script: in package.json add heroku-postbuild scripts that will install on the server.
+server.js:
+ - update server to point to the front end static assets: unless we're hitting the api routes in server.js, point to the index.html. 
+ - if process.env.NODE_ENV === production...
+package.json:
+ - create post build script: add heroku-postbuild scripts that will install on the server.
+ 
 heroku login
 heroku create
 //get the app name from online (check deploy tab for instructions)
@@ -162,3 +166,32 @@ RegisterModal:
   - make the modal close if modal is up and is authenticated inside the componentDidUpdate function.
 Logout.js: create file, add it to AppNavbar in a NavItem.
 authActions.js: add basic logout action & export it.
+
+12. Login Modal & Final bits
+LoginModal.js: Copy register modal accross and change some bits:
+  - change component to RegisterModal
+  - import login from authActions
+  - don't need name for the state
+  - change propTypes register to login
+  - LOGIN_FAIL instead of REGISTER_FAIL
+  - change onSubmit:
+    - add new code
+  - change modal
+  - change register action to login and export LoginModal instead of RegisterModal.
+AppNavbar: 
+  - import LoginModal
+  - add LoginModal NavItem
+authActions:
+  - Create Login User action:
+    -copy register user, remove name parameters and change endpoint to /api/ath, change to LOGIN_SUCCESS & FAIL to REGISTER_SUCCESS & FAIL
+fix login & logout menu:
+  - AppNavbar: get auth out to be able to render differently if logged in
+    - add connect to export function
+    - add PropTypes declaration
+    - change render method with ternary functions, displaying separate fragments depending on auth state (make some new objects with fragments inside and use ternary to display based on user and authState)
+fix adding&deleting items (we need to create& delete tokens)
+  - ItemActions: bring in tokenConfig (helper function we created to bring in the token from local storage and put it in the headers)
+  - add.catch error dispatch to get axios request
+  - add tokenConfig param in the requests to attach the tokens to them.
+fix what is shown when logged out/in
+  - put ternary operators on delete buttons and add button which requires bringing in the auth state and displaying if isAuthenticated = true.

@@ -33,7 +33,7 @@ router.post("/", (req, res) => {
     //Validate password using a method called compare, which takes in the plain text password, and the hashed password. It returns a boolean promise.
     bcrypt.compare(password, user.password)
     .then(isMatch => {
-        if(!isMatch) return res.status(400).json({ msg: 'Invalid cresentials'})
+        if(!isMatch) return res.status(400).json({ msg: 'Invalid credentials'})
         // jwt.sign(payload, secretOrPrivateKey, [options, callback])
         jwt.sign(
           { id: user.id },

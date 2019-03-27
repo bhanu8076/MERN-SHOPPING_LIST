@@ -11,7 +11,9 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { addItem } from "../actions/itemActions";
+import PropTypes from "prop-types";
 //import uuid from "uuid";
+
 class ItemModal extends Component {
   state = {
     modal: false,
@@ -22,6 +24,10 @@ class ItemModal extends Component {
     this.setState({
       modal: !this.state.modal
     });
+  };
+
+  static propTypes = {
+    isAuthenticated: PropTypes.bool
   };
 
   onChange = e => {
@@ -51,19 +57,24 @@ class ItemModal extends Component {
   render() {
     return (
       <div>
-        <Button
-          color="dark"
-          style={{
-            marginBottom: "2rem",
-            marginLeft: "50%",
-            transform: "translateX(-50%)"
-          }}
-          align="center"
-          onClick={this.toggle}
-          mx="auto"
-        >
-          Add Item
-        </Button>
+        {this.props.isAuthenticated ? (
+          <Button
+            color="dark"
+            style={{
+              marginBottom: "2rem",
+              marginLeft: "50%",
+              transform: "translateX(-50%)"
+            }}
+            align="center"
+            onClick={this.toggle}
+            mx="auto"
+          >
+            Add Item
+          </Button>
+        ) : (
+          <h4 align="center">Please login to manage items</h4>
+        )}
+
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Add to List</ModalHeader>
           <ModalBody>
@@ -93,7 +104,8 @@ class ItemModal extends Component {
 
 const mapStateToProps = state => ({
   //same name as the reducer in reducers index.js
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 // prettier-ignore

@@ -12,6 +12,14 @@ import PropTypes from "prop-types";
 class ShoppingList extends Component {
   //for now use static state, later can change to Redux
 
+  //whenever you have component properties you should put them inside of prop types, which is a form of validation, we also add isRequired.
+  static propTypes = {
+    getItems: PropTypes.func.isRequired,
+    //item represents our state (it is a prop, but we're mapping it from the state), whicch is an object
+    item: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool
+  };
+
   componentDidMount() {
     this.props.getItems();
   }
@@ -49,15 +57,18 @@ class ShoppingList extends Component {
             {items.map(({ _id, name }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
-                  <Button
-                    className="remove-btn"
-                    color="danger"
-                    size="sm"
-                    //bind the id to this so that we can use it up there out of scope
-                    onClick={this.onDeleteClick.bind(this, _id)}
-                  >
-                    &times;
-                  </Button>
+                  {this.props.isAuthenticated ? (
+                    <Button
+                      className="remove-btn"
+                      color="danger"
+                      size="sm"
+                      //bind the id to this so that we can use it up there out of scope
+                      onClick={this.onDeleteClick.bind(this, _id)}
+                    >
+                      &times;
+                    </Button>
+                  ) : null}
+
                   {name}
                 </ListGroupItem>
               </CSSTransition>
@@ -69,15 +80,18 @@ class ShoppingList extends Component {
   }
 }
 
-//whenever you have component properties you should put them inside of prop types, which is a form of validation, we also add isRequired.
-ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  //item represents our state (it is a prop, but we're mapping it from the state), whicch is an object
-  item: PropTypes.object.isRequired
-};
+// moved this into the class with static
+// //whenever you have component properties you should put them inside of prop types, which is a form of validation, we also add isRequired.
+// ShoppingList.propTypes = {
+//   getItems: PropTypes.func.isRequired,
+//   //item represents our state (it is a prop, but we're mapping it from the state), whicch is an object
+//   item: PropTypes.object.isRequired
+// };
+
 const mapStateToProps = state => ({
   //same name as the reducer in reducers index.js
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 // prettier-ignore
